@@ -5,22 +5,23 @@ from django.db import models
 # Create your models here.
 class Poll(models.Model):
   """
-  Модель голосования
+  РњРѕРґРµР»СЊ РіРѕР»РѕСЃРѕРІР°РЅРёСЏ
   """
   question = models.CharField(max_length=200)
-  pub_date = models.DateTimeField('Дата публикации')
+  pub_date = models.DateTimeField('Р”Р°С‚Р° РїСѓР±Р»РёРєР°С†РёРё')
 
   def __unicode__(self):
     return self.question
 
   def was_published_today(self):
-    """Голосование опубликовано сегодня?"""
+    """Р“РѕР»РѕСЃРѕРІР°РЅРёРµ РѕРїСѓР±Р»РёРєРѕРІР°РЅРѕ СЃРµРіРѕРґРЅСЏ?"""
     return self.pub_date.date() == datetime.date.today()
+  was_published_today.short_description = 'Published today?'
 
 
 class Choice(models.Model):
   """
-  Модель выбора голосования
+  РњРѕРґРµР»СЊ РІС‹Р±РѕСЂР° РіРѕР»РѕСЃРѕРІР°РЅРёСЏ
   """
   poll = models.ForeignKey(Poll)
   choice = models.CharField(max_length=200)
@@ -28,5 +29,3 @@ class Choice(models.Model):
 
   def __unicode__(self):
     return self.choice
-
-
